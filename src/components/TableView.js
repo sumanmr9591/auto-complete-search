@@ -2,7 +2,6 @@ import React from 'react';
 
 const TableView = ( { tableData, removeSuggestion } ) => {
   return ( <div className="tableContainer">
-    <button className="btn addBtn">Add Suggestion</button>
     <table cellpadding="5" cellspacing="5">
       <tr>
         <th>ID</th>
