@@ -49,13 +49,9 @@
   font-weight: bold;
 }
 .inputContainer {
-  margin: 120px;
+  margin: 90px;
 }
-.tableContainer {
-  width: 100%;
-  max-width: 1120px;
-  padding: 10px;
-}
+
 .tableContainer table {
   width: 100%;
 }
@@ -208,4 +204,85 @@
   color: #002856;
   border: 1px solid #002856;
   border-radius: 5px;
+}
+.banner {
+  position: relative;
+  z-index: 100;
+  color: #fff;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  background: #2493cd;
+  border-bottom: 2px solid #1d88bf;
+  border-top: 3px solid #e8a700;
+}
+.banner p {
+  padding-top: 1px;
+  font: 700 17px/17px "Museo-Sans", sans-serif;
+  color: #fff;
+}
+.tableContainer {
+  background: #ebeff2 !important;
+  padding: 60px 0 30px;
+}
+.styleTable {
+  background: #37536c;
+  color: #ffffff;
+  border-collapse: collapse;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  min-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  max-width: 1120px;
+  margin: 0px auto;
+}
+
+.addBtnContainer {
+  max-width: 1120px;
+  margin: 0px auto;
+}
+
+.styleTable thead tr {
+  background-color: #009879;
+  color: #ffffff;
+  text-align: left;
+}
+.styleTable th,
+.styleTable td {
+  padding: 8px 15px;
+}
+.styleTable tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.styleTable tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+  color: #37536c;
+}
+
+.styleTable tbody tr:last-of-type {
+  border-bottom: 2px solid #009879;
+}
+.styleTable tbody tr.active-row {
+  font-weight: bold;
+  color: #009879;
+}
+.addBtnContainer {
+  width: 100%;
+  max-width: 1120px;
+}
+.editIcon {
+  height: 25px;
+  width: 25px;
+}
+.iconBtnContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.actionsContainer {
+  display: flex;
+}
+.marginRight {
+  margin-right: 10px;
 }

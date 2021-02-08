@@ -10,6 +10,7 @@ import axios from 'axios';
 import SearchBar from './components/SearchBar';
 import TableView from './components/TableView';
 import ModalComponent from './components/ModalComponent';
+import TheHeader from './components/TheHeader';
 
 function App () {
   const [suggestions, setSuggestions] = useState( [] );
@@ -20,7 +21,7 @@ function App () {
   const newSuggestion = useRef();
   const changedSuggestion = useRef();
   useEffect( () => {
-    axios.get( 'https://api.mocki.io/v1/5bb19e07' )
+    axios.get( 'https://api.mocki.io/v1/f5994b97' )
       .then( ( res ) => {
         setSuggestions( res.data.data )
         console.log( 'suggestions', suggestions )
@@ -71,27 +72,33 @@ function App () {
     setShowModal( true );
   }
   return (
-    <div className="App">
-      <ModalComponent mode="add" showModal={showModal} closeModal={() => setShowModal( false )} addSuggestion={addSuggestion} submit="Add" title="Add a Suggestion">
-        <div className="flex">
-          <input type="text" ref={newSuggestion} placeholder="Type here to add Suggestion" />
+    <div className="mainContainer">
+      <TheHeader />
+      <div className="App">
+        <ModalComponent mode="add" showModal={showModal} closeModal={() => setShowModal( false )} addSuggestion={addSuggestion} submit="Add" title="Add a Suggestion">
+          <div className="flex">
+            <input type="text" ref={newSuggestion} placeholder="Type here to add Suggestion" />
+          </div>
+        </ModalComponent>
+        <ModalComponent mode="delete" showModal={showModalDelete} closeModal={() => setShowModalDelete( false )} deleteSuggestion={deleteSuggestion} submit="Delete" title={`Are you sure?`}>
+          <div className="flex">
+            Are you sure to delete {currentSelection.name}?
         </div>
-      </ModalComponent>
-      <ModalComponent mode="delete" showModal={showModalDelete} closeModal={() => setShowModalDelete( false )} deleteSuggestion={deleteSuggestion} submit="Delete" title={`Are you sure?`}>
-        <div className="flex">
-          Are you sure to delete {currentSelection.name}?
+        </ModalComponent>
+        <ModalComponent mode="edit" showModal={showModalEdit} closeModal={() => setShowModalEdit( false )} saveSuggestion={saveSuggestion} submit="Save" title={`Edit Suggestion ${ currentSelection.name }`}>
+          <div className="flex">
+            <input type="text" ref={changedSuggestion} />
+          </div>
+        </ModalComponent>
+        <div className="inputContainer">
+          <SearchBar suggestions={suggestions} />
         </div>
-      </ModalComponent>
-      <ModalComponent mode="edit" showModal={showModalEdit} closeModal={() => setShowModalEdit( false )} saveSuggestion={saveSuggestion} submit="Save" title={`Edit Suggestion ${ currentSelection.name }`}>
-        <div className="flex">
-          <input type="text" ref={changedSuggestion} />
-        </div>
-      </ModalComponent>
-      <div className="inputContainer">
-        <SearchBar suggestions={suggestions} />
       </div>
-      <button className="btn addBtn" onClick={() => showModalToAddSuggestion()}>Add Suggestion</button>
-      <TableView tableData={suggestions} removeSuggestion={removeSuggestion} editSuggestion={editSuggestion} />
+      <div className="tableContainer">
+        <div className="addBtnContainer"><button className="btn addBtn" onClick={() => showModalToAddSuggestion()}>Add Suggestion</button></div>
+        <TableView tableData={suggestions} removeSuggestion={removeSuggestion} editSuggestion={editSuggestion} />
+
+      </div>
     </div>
   );
 }

@@ -19,7 +19,7 @@ const SearchBar = ( { suggestions } ) => {
     setSearchKey( text.name );
   }
   return ( <div className="autoCompleteText">
-    <input value={searchKey} onChange={( e ) => filterList( e )} type="text" />
+    <input placeholder="Search Gadgets" value={searchKey} onChange={( e ) => filterList( e )} type="text" />
     <ul>
       {
         filteredSuggestions.map( ( text, index ) => {
