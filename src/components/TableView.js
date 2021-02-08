@@ -8,7 +8,7 @@ const TableView = ( { tableData, removeSuggestion } ) => {
         <th>Suggestion</th>
         <th>Actions</th>
       </tr>
-      {
+      {tableData.length > 0 &&
         tableData.map( ( data, index ) => {
           return ( <tr key={data.id}><td>{data.id}</td><td>{data.name}</td><td>
             <span><button className="btn editBtn">Edit</button></span>

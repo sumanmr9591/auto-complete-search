@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ModalComponent = ( { showModal, closeModal, mode, title, submit, children } ) => {
+const ModalComponent = ( { showModal, closeModal, mode, title, submit, children, addSuggestion } ) => {
   return ( <div style={{ display: showModal ? 'flex' : 'none' }} className="modalWrap">
     <div className="modalBody">
       <div class="modalHeader">{title}</div>
@@ -11,9 +11,9 @@ const ModalComponent = ( { showModal, closeModal, mode, title, submit, children 
       <div className="modalButtonContainer" >
         <button onClick={() => closeModal()} className="cancelButton">
           Cancel
-        </button> <button className="confirmButton" >
+        </button> {mode === 'add' && <button onClick={() => addSuggestion()} className="confirmButton" >
           {submit}
-        </button></div>
+        </button>}</div>
 
     </div>
   </div> )

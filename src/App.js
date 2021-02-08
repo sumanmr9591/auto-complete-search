@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 // import styles
 import './App.css';
@@ -14,6 +14,7 @@ import ModalComponent from './components/ModalComponent';
 function App () {
   const [suggestions, setSuggestions] = useState( [] );
   const [showModal, setShowModal] = useState( false );
+  const newSuggestion = useRef();
   useEffect( () => {
     axios.get( 'https://api.mocki.io/v1/5bb19e07' )
       .then( ( res ) => {
@@ -29,10 +30,27 @@ function App () {
   const closeModal = () => {
     setShowModal( false )
   }
+  const addSuggestion = () => {
+    if ( newSuggestion.current.value === '' ) {
+      alert( 'Suggestion cannot be empty' );
+      return
+    }
+    let newData = [...suggestions];
+
+    newData.push( {
+      id: suggestions.length + 1,
+      name: newSuggestion.current.value
+    } )
+    setSuggestions( newData );
+    console.log( suggestions );
+    setShowModal( false )
+  }
   return (
     <div className="App">
-      <ModalComponent showModal={showModal} closeModal={closeModal} submit="Add" title="Add a Suggestion">
-        <p>I can be the body</p>
+      <ModalComponent mode="add" showModal={showModal} closeModal={closeModal} addSuggestion={addSuggestion} submit="Add" title="Add a Suggestion">
+        <div className="flex">
+          <input type="text" ref={newSuggestion} />
+        </div>
       </ModalComponent>
       <div className="inputContainer">
         <SearchBar suggestions={suggestions} />
