@@ -14,7 +14,11 @@ import ModalComponent from './components/ModalComponent';
 function App () {
   const [suggestions, setSuggestions] = useState( [] );
   const [showModal, setShowModal] = useState( false );
+  const [showModalDelete, setShowModalDelete] = useState( false );
+  const [showModalEdit, setShowModalEdit] = useState( false );
+  const [currentSelection, setCurrentSelection] = useState( '' );
   const newSuggestion = useRef();
+  const changedSuggestion = useRef();
   useEffect( () => {
     axios.get( 'https://api.mocki.io/v1/5bb19e07' )
       .then( ( res ) => {
@@ -23,12 +27,30 @@ function App () {
       } )
       .catch( ( err ) => console.log( err ) );
   }, [] )
-  const removeSuggestion = ( id ) => {
-    let tempData = suggestions.filter( ( suggestion ) => suggestion.id !== id );
-    setSuggestions( tempData );
+  const removeSuggestion = ( data ) => {
+    setCurrentSelection( data );
+    setShowModalDelete( true );
   }
-  const closeModal = () => {
-    setShowModal( false )
+  const editSuggestion = ( data ) => {
+    setCurrentSelection( data );
+    changedSuggestion.current.value = data.name;
+    setShowModalEdit( true );
+  }
+  const deleteSuggestion = () => {
+    let tempData = suggestions.filter( ( suggestion ) => suggestion.id !== currentSelection.id );
+    setSuggestions( tempData );
+    setShowModalDelete( false )
+  }
+  const saveSuggestion = () => {
+    let tempData = [...suggestions];
+    for ( let i = 0; i < tempData.length; i++ ) {
+      if ( tempData[i].id === currentSelection.id ) {
+        tempData[i].name = changedSuggestion.current.value
+      }
+    }
+    setSuggestions( tempData );
+    setShowModalEdit( false );
+
   }
   const addSuggestion = () => {
     if ( newSuggestion.current.value === '' ) {
@@ -42,21 +64,34 @@ function App () {
       name: newSuggestion.current.value
     } )
     setSuggestions( newData );
-    console.log( suggestions );
-    setShowModal( false )
+    setShowModal( false );
+  }
+  const showModalToAddSuggestion = () => {
+    newSuggestion.current.value = '';
+    setShowModal( true );
   }
   return (
     <div className="App">
-      <ModalComponent mode="add" showModal={showModal} closeModal={closeModal} addSuggestion={addSuggestion} submit="Add" title="Add a Suggestion">
+      <ModalComponent mode="add" showModal={showModal} closeModal={() => setShowModal( false )} addSuggestion={addSuggestion} submit="Add" title="Add a Suggestion">
         <div className="flex">
-          <input type="text" ref={newSuggestion} />
+          <input type="text" ref={newSuggestion} placeholder="Type here to add Suggestion" />
+        </div>
+      </ModalComponent>
+      <ModalComponent mode="delete" showModal={showModalDelete} closeModal={() => setShowModalDelete( false )} deleteSuggestion={deleteSuggestion} submit="Delete" title={`Are you sure?`}>
+        <div className="flex">
+          Are you sure to delete {currentSelection.name}?
+        </div>
+      </ModalComponent>
+      <ModalComponent mode="edit" showModal={showModalEdit} closeModal={() => setShowModalEdit( false )} saveSuggestion={saveSuggestion} submit="Save" title={`Edit Suggestion ${ currentSelection.name }`}>
+        <div className="flex">
+          <input type="text" ref={changedSuggestion} />
         </div>
       </ModalComponent>
       <div className="inputContainer">
         <SearchBar suggestions={suggestions} />
       </div>
-      <button className="btn addBtn" onClick={() => setShowModal( true )}>Add Suggestion</button>
-      <TableView tableData={suggestions} removeSuggestion={removeSuggestion} />
+      <button className="btn addBtn" onClick={() => showModalToAddSuggestion()}>Add Suggestion</button>
+      <TableView tableData={suggestions} removeSuggestion={removeSuggestion} editSuggestion={editSuggestion} />
     </div>
   );
 }
