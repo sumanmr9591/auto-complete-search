@@ -3,3 +3,43 @@
   margin: 0px auto;
   margin-top: 20px;
 }
+.autoCompleteText {
+  width: 100%;
+  border: 1px solid #ccc;
+  -webkit-box-shadow: 4px 6px 10px -4px rgba(0, 0, 0, 0.55);
+  -moz-box-shadow: 4px 6px 10px -4px rgba(0, 0, 0, 0.55);
+  box-shadow: 4px 6px 10px -4px rgba(0, 0, 0, 0.55);
+}
+.autoCompleteText input {
+  border: none;
+  width: 100%;
+  padding: 10px 15px;
+  font-weight: 600;
+  font-size: 16px;
+  color: #012856;
+  outline: none;
+  box-sizing: border-box;
+}
+.autoCompleteText ul {
+  list-style-type: none;
+  text-align: left;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid grey;
+}
+.autoCompleteText ul::before {
+  content: "";
+}
+.autoCompleteText li {
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 14px;
+  border-bottom: 0.5px solid #ddd;
+}
+.autoCompleteText li:hover {
+  background: rgba(128, 128, 128, 0.2);
+  font-weight: bold;
+}
+.inputContainer {
+  margin: 120px;
+}

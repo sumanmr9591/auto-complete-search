@@ -22,7 +22,10 @@ function App () {
   }, [] )
   return (
     <div className="App">
-      <SearchBar suggestions={suggestions} />
+      <div className="inputContainer">
+        <SearchBar suggestions={suggestions} />
+      </div>
+
       <TableView />
     </div>
   );
