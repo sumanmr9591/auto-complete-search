@@ -9,6 +9,7 @@
   -webkit-box-shadow: 4px 6px 10px -4px rgba(0, 0, 0, 0.55);
   -moz-box-shadow: 4px 6px 10px -4px rgba(0, 0, 0, 0.55);
   box-shadow: 4px 6px 10px -4px rgba(0, 0, 0, 0.55);
+  position: relative;
 }
 .autoCompleteText input {
   border: none;
@@ -26,6 +27,13 @@
   margin: 0;
   padding: 0;
   border-top: 1px solid grey;
+  border: 1px solid #ccc;
+  position: absolute;
+  z-index: 999;
+  background: #fff;
+  left: 0px;
+  top: 40px;
+  width: 100%;
 }
 .autoCompleteText ul::before {
   content: "";
@@ -42,4 +50,53 @@
 }
 .inputContainer {
   margin: 120px;
+}
+.tableContainer {
+  width: 100%;
+  max-width: 1120px;
+  padding: 10px;
+}
+.tableContainer table {
+  width: 100%;
+}
+.tableContainer table tr th {
+  text-align: left;
+  padding-bottom: 10px;
+}
+.tableContainer table tr {
+  margin-top: 5px;
+}
+
+.btn {
+  border-radius: 5px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  outline: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.deleteBtn {
+  background: rgb(255, 0, 0);
+  margin-left: 10px;
+}
+.editBtn {
+  background: #00966c;
+}
+
+.addBtn {
+  background: #012856;
+  float: right;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+  .inputContainer {
+    margin: 30px;
+  }
+  .tableContainer {
+    margin: 0px 30px;
+  }
 }

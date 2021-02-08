@@ -20,13 +20,17 @@ function App () {
       } )
       .catch( ( err ) => console.log( err ) );
   }, [] )
+  const removeSuggestion = ( id ) => {
+    let tempData = suggestions.filter( ( suggestion ) => suggestion.id !== id );
+    setSuggestions( tempData );
+  }
   return (
     <div className="App">
       <div className="inputContainer">
         <SearchBar suggestions={suggestions} />
       </div>
 
-      <TableView />
+      <TableView tableData={suggestions} removeSuggestion={removeSuggestion} />
     </div>
   );
 }
