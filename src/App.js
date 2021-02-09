@@ -85,7 +85,7 @@ function App () {
             Are you sure to delete {currentSelection.name}?
         </div>
         </ModalComponent>
-        <ModalComponent mode="edit" showModal={showModalEdit} closeModal={() => setShowModalEdit( false )} saveSuggestion={saveSuggestion} submit="Save" title={`Edit Suggestion ${ currentSelection.name }`}>
+        <ModalComponent mode="edit" showModal={showModalEdit} closeModal={() => setShowModalEdit( false )} saveSuggestion={saveSuggestion} submit="Save" title={`Edit Suggestion: ${ currentSelection.name }`}>
           <div className="flex">
             <input type="text" ref={changedSuggestion} />
           </div>
