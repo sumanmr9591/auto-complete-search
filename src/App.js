@@ -44,6 +44,10 @@ function App () {
   }
   const saveSuggestion = () => {
     let tempData = [...suggestions];
+    if ( changedSuggestion.current.value === '' ) {
+      alert( 'Suggestion cannot be empty' );
+      return
+    }
     for ( let i = 0; i < tempData.length; i++ ) {
       if ( tempData[i].id === currentSelection.id ) {
         tempData[i].name = changedSuggestion.current.value
